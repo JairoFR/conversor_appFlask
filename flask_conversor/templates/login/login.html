@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block titulo %}Login{% endblock %}
+{% block contenido %}
+<div class="container-md-fluid color pt-3 fondo_cabecera">
+    <div class="row ">
+        <div class="col-xl-8 col-lg-8 col-md-6 text-left ms-3">
+            <a class="btn btn-outline-light" href="/" aria-label="Settings">
+                <i class="fa fa-home " aria-hidden="true"></i>
+            </a>
+            <h4 class="titulo ms-3 d-inline-flex">Conversor</h4>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 d-flex justify-content-end">
+            <a class="btn btn-danger signing " href=''>Inicia session</a>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-4">
+            <form action="/login" method="post">
+                <h4 class="mb-5">Inicia session en tu cuenta</h4>
+                <div class="mb-3">
+                    <label for="email" class="form-label "> Correo Electrónico</label>
+                    <input type="text" name="email" class="form-control" id="email" aria-describedby="identificacionHelp" placeholder="Ejemplo: nombre@dominio.com">
+                    <div id="identificacionHelp" class="form-text">No compartas tu correo con nadie.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" name="password" class="form-control" id="password">
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Ingresar</button>
+                </div>
+                <p class="mt-3">No tienes una cuenta? <a href="/signup">Registrate gratis</a></p>
+                
+            </form>
+        </div>
+            
+
+        </div>
+    </div>
+</div>
+{% endblock %}
