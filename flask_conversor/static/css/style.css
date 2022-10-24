@@ -1,4 +1,10 @@
-.fondo_cabecera{
+.fondo_cabecera {
     background-color: rgb(20, 73, 152);
-    height: 10rem;
+    height: 7rem;
+}
+
+.centrado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

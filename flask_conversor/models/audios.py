@@ -27,3 +27,8 @@ class Audios(BaseModelo): #Cambiar a nombre de modelo en singular
             return False
         return results
 
+    @classmethod
+    def destroy(cls,data):
+        query  = f"DELETE FROM {cls.modelo} WHERE audio = %(data)s;"
+        data = { 'data': data}
+        return connectToMySQL(os.environ.get("BASE_DATOS_NOMBRE")).query_db(query,data)

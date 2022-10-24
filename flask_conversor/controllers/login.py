@@ -7,9 +7,9 @@ bcrypt = Bcrypt(app)
 
 @app.route("/")
 def index():
-    # if 'usuario' not in session:
-    #     flash('Primero tienes que logearte', 'error')
-    #     return redirect('/login')
+    if 'usuario' in session:
+        flash('Cierra session para salir', 'error')
+        return redirect('/conversor')
     return render_template("index.html")
 
 
@@ -76,5 +76,6 @@ def login():
 
 @app.route('/logout')
 def logout():
+    
     session.clear()
     return redirect('/login')

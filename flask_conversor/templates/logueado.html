@@ -1,10 +1,23 @@
-{% extends "/base.html" %}
-{% block titulo %}{% endblock %}
 
-{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link href="{{url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="{{ url_for('static', filename='css/toastr.min.css') }}" rel="stylesheet">
+</head>
+<body>
+
+
 <div class="container-md-fluid color pt-3 fondo_cabecera">
     <div class="row ">
-        <div class="col-xl-8 col-lg-8 col-md-6 text-left ms-3">
+        <div class="col-xl-8 col-lg-8 col-md-6 text-left ms-3 ">
             <a class="btn btn-outline-light" href="/" aria-label="Settings">
                 <i class="fa fa-home " aria-hidden="true"></i>
             </a>
@@ -15,26 +28,79 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <h1>{{session['usuario']}} - {{session['usuario_id']}}</h1>
-    <div class="row d-flex justify-content-center">
 
-        <div class="col-5">
+    <div class="row d-flex justify-content-center mt-5">
+        <h3 class="text-center m-5">Convertidor de audio a texto</h3>
+        <div class="col-lg-4 border p-3 mb-2 bg-dark text-white">
             <form action="{{url_for('upload_audio')}}" method="post" enctype="multipart/form-data">
                 <div class="mb-1">
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Sube tus audios!</label>
-                        <input class="form-control" type="file" id="file" name="file">
+                        <label for="formFile" class="form-label"></label>
+                        <input class="form-control-file " type="file" id="file" name="file">
                     </div>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-info mt-3 btn-block">Enviar</button>
-                </div> 
+                <div class="row">
+                    <button type="submit" class="btn btn-light mt-3 btn-block">Abrir archivo</button>
+                </div>
             </form>
+            
         </div>
+  
+        <div class="w-100"></div>
+        <div class="col-lg-4 mt-5 " >
+   
+            {% if audio == False %}
+
+            {%else%}
+            {%for sound in audio%}
+            <div class="text-center">
+                <h6>Archivo: {{sound.audio}} <a class=" btn btn-danger p-1" href="{{url_for('destroy_audio', file=sound.audio)}}"><i class=" fa fa-window-close" aria-hidden="true"></i></a></h6>
+            </div>
+         
+            <form action="{{url_for('convertir_audio')}}" method="post">
+                <input id="filename" name="filename"  value="{{sound.audio}}" hidden>
+                <div class="mt-3 text-center">
+                    <button type="submit" class="btn btn-success" id="click">Convertir</button>
+                </div>
+            </form>
+            <div class="mt-3 text-center" id="loader" ></div>
+            {%endfor%}
+            {%endif%}
+          
+        </div>
+
     </div>
+
+  
     
 
-</div>
 
-{% endblock %}
+
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/toastr.min.js') }}"></script>
+    <script> src="https://code.jquery.com/jquery-3.6.1.min.js"</script>
+
+    <script src="{{ url_for('static', filename='js/onload.js') }}"></script>
+    
+    
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+        }
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    toastr.{{category}}('{{ message }}', 'Mensaje de Sistema');
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends "/base.html" %}
+{% block titulo %}{% endblock %}
+{% block head %}
+<style>
+    body {
+        background-color: #fff0f0;
+    }
+
+</style>
+{% endblock %}
+{% block contenido %}
+
+
+<div class="hide" id="contenido">
+    <div class="container-md-fluid color pt-3 fondo_cabecera">
+        <div class="row ">
+            <div class="col-xl-8 col-lg-8 col-md-6 text-left ms-3">
+                <a class="btn btn-outline-light" href="/" aria-label="Settings">
+                    <i class="fa fa-home " aria-hidden="true"></i>
+                </a>
+                <h4 class="titulo ms-3 d-inline-flex">Conversor</h4>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 d-flex justify-content-end">
+                <a class="btn btn-danger signing " href='/logout'>logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt-5 d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+                <a class="centrado btn btn-success " href="{{url_for('downloadFile', name=name)}}"><i class="fa fa-download fa-5x" aria-hidden="true">Download</i></a>
+            <a class="text-decoration-none " href="{{url_for('principal')}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Realizar otra conversion</a>
+            </div>
+        </div>
+    </div>  
+    
+</div>
+
+{% block scripts %}
+
+
+{% endblock %}
+{% endblock %}

@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `db_conversor`.`audios` (
   CONSTRAINT `fk_conversiones_usuarios`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `db_conversor`.`usuarios` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `db_conversor`.`textos` (
   CONSTRAINT `fk_textos_usuarios1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `db_conversor`.`usuarios` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

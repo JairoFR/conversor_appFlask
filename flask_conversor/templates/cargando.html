@@ -1,6 +1,13 @@
 {% extends "/base.html" %}
 {% block titulo %}{% endblock %}
+{% block head %}
+<style>
+    body {
+        background-color: #fff0f0;
+    }
 
+</style>
+{% endblock %}
 {% block contenido %}
 <div class="container-md-fluid color pt-3 fondo_cabecera">
     <div class="row ">
@@ -16,30 +23,14 @@
     </div>
 </div>
 <div class="container">
-    <h1>{{session['usuario']}} - {{session['usuario_id']}}</h1>
-    <div class="row d-flex justify-content-center">
-
-        <div class="col-5">
-            
-        <h1>Conversion aca </h1>
-        {%for sound in audio%}
-        <h3>{{sound.audio}}</h3>
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col-6 ">
+            <i class="fa fa-cog fa-spin fa-5x fa-fw" aria-hidden="true"></i>
+            <span class="sr-only">Saving. Hang tight!</span>
+            <h3>Realizando conversion</h3>
         </div>
         
     </div>
-    <div class="row">
-        <div class="col-5">
-            <form action="{{url_for('convertir_audio')}}" method="post">
-                <input id="filename" name="filename" type="hidden" value="{{sound.audio}}">
-                <div class="text-center ">
-                    <button type="submit" class="btn btn-success">Registrarse</button>
-                </div>
-            </form>
-            {%endfor%}
-        </div>
-    </div>
-    
-
-</div>
+</div>  
 
 {% endblock %}
